@@ -1,0 +1,16 @@
+# Freight Rate Calculator
+
+A web-based tool to calculate freight shipping rates based on distance, weight, equipment type, and other factors.
+
+## Features
+- Calculate rates for different equipment types.
+- Responsive design for desktop and mobile.
+- Simple and clean user interface.
+
+## Setup
+1. Clone or download this repository.
+2. Open `index.html` in a web browser to use the calculator.
+
+## Usage
+1. Enter load details (origin, destination, miles, weight, etc.).
+2. Click "Calculate Rates" to view suggested rates and margins.
