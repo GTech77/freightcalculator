@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freight Rate Calculator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Freight Rate Calculator</h1>
+        
+        <div class="card">
+            <div class="tabs">
+                <button class="tab active" data-tab="basic">Basic Calculator</button>
+                <button class="tab" data-tab="advanced">Advanced Options</button>
+            </div>
+            
+            <div class="tab-content active" id="basic-tab">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" placeholder="e.g., Monroe, NC">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" placeholder="e.g., Clanton, AL">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="miles">Total Miles</label>
+                        <input type="number" id="miles" min="0" placeholder="Enter miles" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight (lbs)</label>
+                        <input type="number" id="weight" min="0" placeholder="Enter weight" value="0">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="equipment">Equipment Type</label>
+                        <select id="equipment">
+                            <option value="van">Van</option>
+                            <option value="reefer">Reefer</option>
+                            <option value="flatbed">Flatbed</option>
+                            <option value="hotshot">Hotshot</option>
+                            <option value="specialized">Specialized</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="target-margin">Target Margin (%)</label>
+                        <input type="number" id="target-margin" min="0" max="100" value="15">
+                    </div>
+                </div>
+                
+                <button id="calculate-btn">Calculate Rates</button>
+            </div>
+            
+            <div class="tab-content" id="advanced-tab">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="market-condition">Market Condition</label>
+                        <select id="market-condition">
+                            <option value="normal">Normal</option>
+                            <option value="tight">Tight Capacity</option>
+                            <option value="loose">Excess Capacity</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="urgency">Urgency</label>
+                        <select id="urgency">
+                            <option value="standard">Standard</option>
+                            <option value="expedited">Expedited</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fuel-price">Diesel Price ($/gal)</label>
+                        <input type="number" id="fuel-price" min="0" step="0.01" value="3.95">
+                    </div>
+                    <div class="form-group">
+                        <label for="season">Season</label>
+                        <select id="season">
+                            <option value="normal">Normal</option>
+                            <option value="produce">Produce Season</option>
+                            <option value="holiday">Holiday Season</option>
+                            <option value="winter">Winter</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="accessorials">Accessorials</label>
+                        <select id="accessorials" multiple size="4">
+                            <option value="liftgate">Liftgate</option>
+                            <option value="inside">Inside Delivery</option>
+                            <option value="detention">Detention Likely</option>
+                            <option value="hazmat">Hazmat</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination-type">Destination Type</label>
+                        <select id="destination-type">
+                            <option value="balanced">Balanced Market</option>
+                            <option value="headhaul">Strong Headhaul Market</option>
+                            <option value="backhaul">Backhaul Market</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="backhaul-friendly">Backhaul Friendly</label>
+                        <select id="backhaul-friendly">
+                            <option value="no">No</option>
+                            <option value="somewhat">Somewhat</option>
+                            <option value="very">Very Friendly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="carrier-availability">Carrier Availability</label>
+                        <select id="carrier-availability">
+                            <option value="normal">Normal</option>
+                            <option value="limited">Limited</option>
+                            <option value="abundant">Abundant</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="calculate-advanced-btn">Calculate Detailed Rates</button>
+            </div>
+        </div>
+        
+        <div class="results" id="results-container">
+            <div class="result-card">
+                <h2>Rate Calculation Results</h2>
+                <div class="result-item">
+                    <span class="label">Shipper Rate:</span>
+                    <span class="value" id="shipper-rate">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Carrier Rate:</span>
+                    <span class="value" id="carrier-rate">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Margin:</span>
+                    <span class="value" id="margin-amount">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Margin Percentage:</span>
+                    <span class="value" id="margin-percentage">0%</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Rate Per Mile (Shipper):</span>
+                    <span class="value" id="rpm-shipper">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Rate Per Mile (Carrier):</span>
+                    <span class="value" id="rpm-carrier">$0.00</span>
+                </div>
+            </div>
+            
+            <div class="result-card">
+                <h2>Market Insights</h2>
+                <div class="result-item">
+                    <span class="label">Market Average Rate:</span>
+                    <span class="value" id="market-rate">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Your Rate vs Market:</span>
+                    <span class="value" id="vs-market">0%</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Market Condition:</span>
+                    <span class="value" id="market-condition-result">Normal</span>
+                </div>
+                <div class="recommendation">
+                    <h3>Recommendation</h3>
+                    <p id="recommendation">Enter load details to get rate recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/calculator.js"></script>
+</body>
+</html>
